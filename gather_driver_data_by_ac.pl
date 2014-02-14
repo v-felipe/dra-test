@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 
 ###############
 # Usage
@@ -90,7 +90,11 @@ sub output_data_by_ac
             or die "Can't open $_ for reading: $!\n";
         while(<INFILE>)
         {
-            if(/$acid/)
+            if(/^ADVISORY_ACCEPTED\s+.*\s+0\s+0\s+0/)
+            {
+                # filter out repeated ADVISORY_ACCEPTED data
+            }
+            elsif(/$acid/)
             {
                 print OUTFILE "$_";
             }
